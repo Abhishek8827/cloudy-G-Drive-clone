@@ -1,0 +1,1058 @@
+.data {
+  flex: 1;
+  padding: 10px 10px 0 20px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border-top: 20px solid white;
+  position: relative;
+  background: white;
+}
+
+.data_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+  height: 56px;
+  position: relative;
+}
+
+.data_headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.driveLabelWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.driveLabelText {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.driveArrowBtn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+.driveArrowBtn:focus {
+  outline: none;
+}
+
+.driveArrowBtn .material-symbols-outlined {
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transform-origin: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.driveArrowBtn.open .material-symbols-outlined {
+  transform: rotate(0deg);
+}
+.driveArrowBtn.closed .material-symbols-outlined {
+  transform: rotate(-180deg);
+}
+.material-symbols-outlined {
+  margin: 1px;
+}
+.data_headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 10px;
+}
+
+.data_content {
+  padding-bottom: 24px;
+}
+
+/* Grid (My Drive section) */
+.data_grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(150px, 20vw, 200px), 1fr)
+  );
+  gap: clamp(10px, 2vw, 15px);
+  padding: clamp(5px, 2vw, 10px);
+  align-items: center;
+  margin: clamp(20px, 5vw, 30px) 0;
+  max-height: 1200px;
+  overflow: hidden;
+  transition: opacity 200ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    max-height 300ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform, opacity, max-height;
+  transform-origin: top center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.data_grid.collapsed {
+  opacity: 0;
+  transform: translateY(-6px) scaleY(0.985);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.data_file {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14),
+    0 2px 1px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  border: 1px solid lightgray;
+  padding: 10px 0 0 0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.data_file span {
+  font-size: clamp(40px, 8vw, 80px);
+  color: gray;
+}
+.data_file:hover {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 3px 3px rgba(0, 0, 0, 0.14),
+    0 1px 8px rgba(0, 0, 0, 0.12);
+}
+.data_file p {
+  border-top: 1px solid #ccc;
+  margin-top: 5px;
+  padding: 10px 5px;
+  background: whitesmoke;
+  font-size: clamp(12px, 2vw, 14px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* List area - adjusted column widths */
+.data_list {
+  transition: margin-top 160ms ease;
+}
+
+.detailsRow {
+  display: grid;
+  /* adjusted columns: Name | Owner | Last Modified | Size | Type | Actions */
+  grid-template-columns: 3fr 1.2fr 1.6fr 0.9fr 0.7fr 0.6fr;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
+  gap: 10px;
+}
+
+.detailsRow p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailsRow p b {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colName {
+  cursor: pointer;
+  user-select: none;
+}
+.colName:focus {
+  outline: none;
+}
+
+.nameArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transform-origin: center;
+}
+.nameArrow.open {
+  transform: rotate(0deg);
+}
+.nameArrow.closed {
+  transform: rotate(-180deg);
+}
+
+.detailsRow.rows {
+  transition: max-height 260ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 220ms cubic-bezier(0.2, 0.9, 0.2, 1), padding 200ms ease;
+  overflow: hidden;
+  max-height: 400px;
+  opacity: 1;
+}
+.detailsRow.rows.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0;
+}
+
+/* Type column styling (small pill showing extension) */
+.fileType {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f1f3f4;
+  font-size: 12px;
+  color: #333;
+  width: fit-content;
+  min-width: 36px;
+  text-transform: lowercase;
+  letter-spacing: 0.2px;
+}
+
+/* Action icon buttons */
+.actionsCell {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  cursor: pointer;
+  transition: transform 120ms ease, background-color 120ms ease;
+  padding: 0;
+}
+.iconBtn .material-symbols-outlined {
+  font-size: 18px;
+}
+.iconBtn:hover {
+  transform: translateY(-2px);
+  background-color: #fbfbfb;
+}
+.iconBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+.iconBtn.danger {
+  border-color: #ffd6d6;
+  background: linear-gradient(180deg, #fff 0%, #fff7f7 100%);
+  color: #b00000;
+}
+
+/* Make header action button visually consistent */
+.actionBtn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d2d2d2;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+/* Responsive tweaks */
+@media (max-width: 920px) {
+  .detailsRow {
+    grid-template-columns: 2.2fr 1fr 1.2fr 0.8fr 0.6fr 0.6fr;
+  }
+}
+@media (max-width: 720px) {
+  /* stack into two columns on small screens and hide less important columns */
+  .detailsRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  /* hide Owner, Size, Type on very small screens to keep layout clean */
+  .detailsRow p:nth-child(2),
+  .detailsRow p:nth-child(4),
+  .detailsRow p:nth-child(5) {
+    display: none;
+  }
+  .detailsRow p:nth-child(6) {
+    justify-content: flex-start;
+  }
+}
+
+/* Reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .data_grid,
+  .driveArrowBtn .material-symbols-outlined,
+  .nameArrow,
+  .detailsRow.rows {
+    transition: none !important;
+  }
+}
+
+/* subtle hover for header icons */
+.driveLabelText,
+.colName b {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease,
+    transform 160ms ease, opacity 160ms ease;
+}
+.driveLabelText:hover,
+.colName:hover b {
+  background-color: rgba(66, 133, 244, 0.08);
+  transform: scale(1.02);
+  opacity: 0.98;
+}
+
+/* small visual tweak to last-modified text to keep it compact */
+.detailsRow p:nth-child(3) {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+
+/* data.css (hover + focus row highlight, owner "Me" display adjustments) */
+
+/* ... keep all your existing styles above unchanged ... */
+
+/* Row hover / focus highlight similar to Google Drive */
+.detailsRow.rows {
+  transition: background-color 160ms ease, box-shadow 160ms ease,
+    transform 120ms ease, max-height 260ms ease, opacity 220ms ease,
+    padding 200ms ease;
+  overflow: hidden;
+  max-height: 400px;
+  opacity: 1;
+}
+
+/* subtle blue highlight on hover and keyboard focus */
+.detailsRow.rows:hover,
+.detailsRow.rows:focus-within,
+.detailsRow.rows:focus {
+  background-color: rgba(66, 133, 244, 0.06); /* light Google-blue tint */
+  box-shadow: inset 0 0 0 1px rgba(66, 133, 244, 0.04);
+  transform: translateZ(0);
+}
+
+/* make rows focusable visually distinct for keyboard users */
+.detailsRow.rows:focus {
+  outline: 2px solid rgba(66, 133, 244, 0.12);
+  outline-offset: 2px;
+}
+
+/* ensure action buttons don't get the hover color washed out */
+.detailsRow.rows .actionBtn,
+.detailsRow.rows .iconBtn {
+  background-clip: padding-box;
+}
+
+/* keep header row unaffected */
+.headerRow {
+  background: transparent;
+}
+
+/* keep hover effect subtle on very small screens */
+@media (max-width: 720px) {
+  .detailsRow.rows:hover,
+  .detailsRow.rows:focus-within,
+  .detailsRow.rows:focus {
+    background-color: rgba(66, 133, 244, 0.04);
+  }
+}
+
+/* Upload tray (bottom-left) - Google Drive style compact progress area */
+.uploadTray {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  width: 320px;
+  max-width: calc(100% - 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1200;
+  pointer-events: none; /* allow clicks only on controls inside */
+}
+
+/* Each upload card */
+.uploadItem {
+  pointer-events: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+}
+
+/* Meta row */
+.uploadMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.uploadName {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* Controls inline (Cancel / Done markers) */
+.uploadControls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.smallBtn {
+  background: transparent;
+  border: none;
+  color: #1a73e8;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.smallBtn:hover {
+  background: rgba(26, 115, 232, 0.06);
+}
+
+.smallDone {
+  color: #0f9d58;
+  font-weight: 600;
+  font-size: 12px;
+}
+.smallErr {
+  color: #b00020;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Progress bar container (thin) */
+.uploadProgressWrap {
+  position: relative;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Progress fill */
+.uploadProgressBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #1a73e8, #8ab4f8);
+  transition: width 220ms linear;
+}
+
+/* Percentage overlay (right) */
+.uploadPct {
+  position: absolute;
+  right: 8px;
+  top: -18px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* Error text */
+.uploadError {
+  color: #b00020;
+  margin-top: 6px;
+  font-size: 12px;
+  max-height: 36px;
+  overflow: hidden;
+}
+
+/* Make tray responsive */
+@media (max-width: 520px) {
+  .uploadTray {
+    width: calc(100% - 36px);
+    left: 18px;
+    right: 18px;
+  }
+}
+
+/* Keep row hover highlight from previous step */
+.detailsRow.rows:hover,
+.detailsRow.rows:focus-within,
+.detailsRow.rows:focus {
+  background-color: rgba(66, 133, 244, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(66, 133, 244, 0.04);
+  transform: translateZ(0);
+}
+
+/* Small style for upload icon label in header */
+.uploadLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background-color 120ms ease;
+  margin-left: 8px;
+}
+.uploadLabel:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.uploadLabel .material-symbols-outlined {
+  font-size: 18px;
+}
+/* Auth buttons in header */
+.authBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d2d2d2;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+.authBtn.secondary {
+  background: rgba(0, 0, 0, 0.03);
+}
+.signedInWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.userDisplay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* small badge indicating source (e.g., uploaded via sidebar) */
+.sourceBadge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 6px;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 999px;
+  background: rgba(26, 115, 232, 0.1);
+  color: #1a73e8;
+  border: 1px solid rgba(26, 115, 232, 0.12);
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+/* progress bar at top of sidebar when uploading */
+.sidebar-upload-progress {
+  position: relative;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+.sidebar-upload-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #1a73e8, #8ab4f8);
+  transition: width 200ms linear;
+}
+
+/* numeric label inside the bar (right side) */
+.sidebar-upload-label {
+  position: absolute;
+  right: 8px;
+  top: -18px;
+  font-size: 12px;
+  color: #174ea6;
+  font-weight: 700;
+}
+
+/* preview icon uses material icon 'preview' - style consistent with other action buttons */
+.iconBtn .material-symbols-outlined,
+.iconBtn {
+  font-size: 18px;
+}
+
+/* keep source badge style (already recommended earlier) */
+.sourceBadge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 6px;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 999px;
+  background: rgba(26, 115, 232, 0.1);
+  color: #1a73e8;
+  border: 1px solid rgba(26, 115, 232, 0.12);
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+/* ---- Upload popup (sidebar) ---- */
+.uploadPopup {
+  position: fixed;
+  right: 24px;
+  bottom: 90px; /* above bottom bar */
+  width: 320px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(12, 22, 39, 0.12);
+  padding: 12px;
+  z-index: 2200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.uploadPopupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+.uploadPopupProgress {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.uploadPopupFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #1a73e8, #8ab4f8);
+  transition: width 160ms linear;
+}
+.uploadPopupActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* small button styles reused */
+.smallBtn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+.smallBtn.danger {
+  background: #fff7f7;
+  border-color: #ffd6d6;
+  color: #b00020;
+}
+
+/* ---- Modal overlay / file modal ---- */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 22, 39, 0.38);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.fileModal {
+  width: min(1100px, 96%);
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(7, 14, 28, 0.24);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+.fileModalHeader,
+.fileModalFooter {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+.fileModalFooter {
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: none;
+  gap: 12px;
+}
+.fileModalBody {
+  padding: 12px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* compact confirm modal */
+.confirmModal {
+  width: min(520px, 96%);
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 18px 48px rgba(6, 12, 22, 0.18);
+}
+
+/* small adjustments for actions and icons inside modals */
+.fileModal .iconBtn,
+.confirmModal .iconBtn {
+  width: 36px;
+  height: 36px;
+}
+
+/* Danger button */
+.iconBtn.danger,
+.smallBtn.danger {
+  color: #b00020;
+}
+
+/* keep consistent drop shadow */
+.uploadPopup,
+.confirmModal,
+.fileModal {
+  will-change: transform, opacity;
+}
+
+/* ensure preview media fit */
+.fileModal img,
+.fileModal iframe,
+.fileModal video {
+  max-width: 100%;
+  max-height: 64vh;
+  border-radius: 6px;
+}
+
+/* subtle responsiveness */
+@media (max-width: 820px) {
+  .fileModal {
+    width: 96%;
+    max-height: 86vh;
+  }
+  .uploadPopup {
+    width: calc(100% - 48px);
+    left: 24px;
+    right: 24px;
+    bottom: 18px;
+  }
+}
+
+/* ===== Modal overlay & panel ===== */
+.modalOverlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 18, 28, 0.56);
+  z-index: 1200;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+  animation: modalFadeIn 160ms ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  width: min(640px, 96%);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(8, 12, 20, 0.45);
+  padding: 20px;
+  transform-origin: center;
+  animation: modalPop 180ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  color: #0b1320;
+}
+
+/* subtle pop animation */
+@keyframes modalPop {
+  from {
+    transform: translateY(6px) scale(0.995);
+    opacity: 0.96;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== Modal content ===== */
+.modal h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.modal p {
+  margin: 0 0 12px 0;
+  color: #2b3948;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* file name preview */
+.modalFileName {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #f6f8fb;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #172033;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: inset 0 -1px 0 rgba(16, 24, 40, 0.02);
+}
+
+/* input */
+.modalInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 24, 40, 0.08);
+  background: #fff;
+  outline: none;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+  margin-bottom: 14px;
+}
+
+.modalInput:focus {
+  border-color: rgba(33, 150, 243, 0.9);
+  box-shadow: 0 6px 18px rgba(33, 150, 243, 0.08);
+}
+
+/* ===== Buttons ===== */
+.modalActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Generic button base (used in modals & elsewhere) */
+.btn {
+  appearance: none;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.08s ease;
+  background: #f0f2f5;
+  color: #091224;
+  box-shadow: 0 6px 14px rgba(16, 24, 40, 0.04);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* primary (confirm/save) */
+.btn.primary {
+  background: linear-gradient(180deg, #1976d2, #115293);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 10px 22px rgba(17, 82, 147, 0.18);
+}
+
+/* danger (delete) */
+.btn.danger {
+  background: linear-gradient(180deg, #ff5e5e, #d43f3f);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 10px 22px rgba(212, 63, 63, 0.14);
+}
+
+/* disabled state */
+.btn[disabled],
+.iconBtn[disabled] {
+  opacity: 0.52;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== Icon buttons (row actions) ===== */
+.iconBtn {
+  appearance: none;
+  border: 0;
+  background: rgba(8, 12, 20, 0.04);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* margin-left: 6px; */
+  transition: background 0.12s ease, transform 0.08s ease;
+}
+
+.iconBtn:hover {
+  background: rgba(8, 12, 20, 0.07);
+  transform: translateY(-1px);
+}
+
+.iconBtn.danger {
+  background: rgba(255, 90, 90, 0.12);
+  color: #b02a2a;
+}
+
+.iconBtn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* layout for actionsCell: keep buttons compact */
+.actionsCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+/* small thumbnail inside list rows */
+.thumbSmall img,
+.thumbSmall video {
+  border-radius: 6px;
+  display: block;
+}
+
+/* make modal responsive on very small screens */
+@media (max-width: 420px) {
+  .modal {
+    padding: 14px;
+    border-radius: 10px;
+  }
+  .btn {
+    padding: 8px 10px;
+    min-height: 36px;
+  }
+}
+
+/* Optional subtle separators inside modal if needed */
+.modal hr {
+  border: none;
+  height: 1px;
+  background: rgba(16, 24, 40, 0.04);
+  margin: 12px 0;
+}
+
+.thumbWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.fileThumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.listThumb img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.fileIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6f7;
+  border-radius: 6px;
+  position: relative;
+  font-size: 24px;
+  color: #444;
+}
+.fileIcon .material-symbols-outlined {
+  font-size: 24px;
+}
+.fileIcon--pdf {
+  background: #fff5f5;
+  color: #b00020;
+}
+.fileIcon--video {
+  background: #f5fbff;
+  color: #0067c5;
+}
+.fileIcon--audio {
+  background: #f9f7ff;
+  color: #4a2ede;
+}
+.fileIcon--generic {
+  background: #f5f6f7;
+}
+.extBadge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  background: #222;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+.listThumb {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 8px;
+}

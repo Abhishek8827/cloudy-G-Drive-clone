@@ -1,0 +1,240 @@
+*{
+  scrollbar-width: thin;                         
+  scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+:root {
+  --bg: #f8fafd;
+  --text: #202124;
+  --muted: #5f6368;
+  --accent: #1a73e8;
+  --border: #e6e6e6;
+  --shadow: rgba(16,24,40,0.06);
+}
+
+.sidebar {
+  width: 260px;
+  min-width: 200px;
+  max-width: 320px;
+  height: 100vh;
+  background: #f8fafd;
+  color: var(--text);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 12px;
+  gap: 12px;
+  transition: width 0.18s ease;
+  overflow: hidden; 
+}
+
+.sidebar.collapsed {
+  width: 84px;
+  min-width: 84px;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sidebar-new-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+.sidebar-new-btn .material-symbols-outlined { font-size: 20px; }
+
+.sidebar-new-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sidebar-new-icon-btn .material-symbols-outlined { font-size: 20px; color: var(--text); }
+
+.sidebar.collapsed .btn-text { display: none; }
+.sidebar.collapsed .sidebar-new-btn { padding: 8px; justify-content: center; }
+
+.sidebar-collapse-btn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sidebar-collapse-btn:hover { background: rgba(0,0,0,0.04); }
+
+.sidebar-middle {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sidebar-middle::-webkit-scrollbar { width: 8px; }
+.sidebar-middle::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 999px; }
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  user-select: none;
+}
+.nav-item:hover { background: rgba(60,64,67,0.06); }
+.nav-item.active { background: rgba(26,115,232,0.12); color: var(--accent); }
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif !important;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  line-height: 1 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.nav-icon,
+.folder-icon,
+.sidebar-new-icon-btn .material-symbols-outlined,
+.sidebar-collapse-btn .material-symbols-outlined {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  font-size: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.sidebar.collapsed .nav-label { display: none; }
+.sidebar.collapsed .nav-item { justify-content: center; gap: 0; padding-left: 0; padding-right: 0; }
+
+.folder-section { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.folder-title {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.sidebar.collapsed .folder-title { display: none; }
+
+.folder-list { display:flex; flex-direction: column; gap: 6px; }
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  min-height: 44px;
+}
+.folder-item:hover { background: rgba(60,64,67,0.04); }
+.folder-item.active { background: rgba(26,115,232,0.08); }
+
+.folder-icon { color: #f4b400; }
+.folder-meta { display:flex; flex-direction: column; min-width:0; overflow:hidden; }
+.folder-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.folder-count { font-size: 12px; color: var(--muted); }
+
+.sidebar.collapsed .folder-meta { display: none; }
+.sidebar.collapsed .folder-item { justify-content: center; padding: 8px 6px; gap: 0; }
+
+.sidebar-bottom {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  height: 30%;
+}
+.storage-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.storage-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.storage-text { display:flex; flex-direction:column; }
+.storage-text .used { font-weight:600; font-size:13px; }
+.storage-text .total { font-size:12px; color:var(--muted); }
+
+.storage-bar { height:8px; background:#f1f3f4; border-radius:999px; width:100%; overflow:hidden; }
+.storage-fill { height:100%; background: linear-gradient(90deg,#4caf50,#1a73e8); width:40%; transition: width 0.3s ease; }
+
+.buy-storage-btn {
+  width:100%;
+  background: transparent;
+  border: 1px solid rgba(26,115,232,0.12);
+  color: var(--accent);
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+@media (max-width: 920px) {
+  .sidebar { width: 220px; }
+  .sidebar.collapsed { width: 84px; }
+}
+@media (max-width: 520px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    height: calc(100vh - 64px);
+    z-index: 1200;
+  }
+  .sidebar.collapsed { width: 84px; }
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.25);
+}

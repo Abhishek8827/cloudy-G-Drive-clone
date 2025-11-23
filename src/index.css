@@ -1,0 +1,123 @@
+  *{
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App{
+  display: grid;
+  grid-template-columns: 220px auto 140px;
+   width: 100%; 
+}
+
+
+:root {
+  --header-height: 60px;  
+}
+
+.header {
+  height: var(--header-height);
+  min-height: var(--header-height);
+  top: 0;
+  position: sticky;  
+  z-index: 1400;      
+}
+
+@media (max-width: 520px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--header-height);  
+    height: calc(100vh - var(--header-height));
+    z-index: 1100;  
+  }
+
+  .right-sidebar {
+    position: fixed;
+    right: 0;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    z-index: 1100;
+  }
+
+  .app-shell,
+  .drive-main,
+  .main-center {
+    padding-top: var(--header-height);
+  }
+  .header_search { max-width: calc(100% - 120px); }  
+} 
+
+/* index.css - global layout */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* App root: header on top, shell fills remaining height */
+.app-root {
+  height: 100vh;               /* full viewport height */
+  display: flex;
+  flex-direction: column;      /* header then shell */
+  background: #f6f7fb;
+}
+
+/* Example header. If your Header uses other styles, adjust height accordingly */
+.header {
+  height: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  z-index: 3;
+}
+
+/* Shell holds sidebar + main content side-by-side */
+.app-shell {
+  display: flex;        /* IMPORTANT: side-by-side layout */
+  align-items: stretch; /* make children full height */
+  flex: 1 1 0;
+  min-height: 0;        /* allow children with overflow to scroll */
+  overflow: hidden;     /* internal scrolling only */
+}
+
+/* Main content area (Data) */
+.data-main, .data {
+  flex: 1 1 0;          /* grow to fill remaining width */
+  min-width: 0;         /* allow inner content to shrink and overflow-x to work */
+  min-height: 0;        /* allow vertical scroll inside */
+  overflow: auto;       /* scroll content if taller than available space */
+  padding: 20px;
+  background: white;
+}
+
+/* Small responsive helper when sidebar is collapsed */
+@media (max-width: 720px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .data-main {
+    padding: 12px;
+  }
+}
