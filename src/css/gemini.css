@@ -1,0 +1,218 @@
+/* src/css/gemini.css */
+
+/* --- TECH / CYBERPUNK THEME VARIABLES --- */
+:root {
+  --tech-bg: #050a10;         /* Very dark blue/black */
+  --tech-surface: #0f1623;    /* Slightly lighter panel */
+  --tech-border: #1e293b;     /* Dark borders */
+  --tech-accent: #00f3ff;     /* Neon Cyan */
+  --tech-success: #00ff41;    /* Hacker Green */
+  --tech-text-main: #e2e8f0;
+  --tech-text-dim: #64748b;
+  --tech-font: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* 1. MAIN PANEL */
+.gemini-panel {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 360px;
+  height: 550px;
+  background-color: var(--tech-bg);
+  /* Glowing Neon Border */
+  border: 1px solid var(--tech-accent);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15), 0 20px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 8px; /* Sharp corners for tech look */
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  overflow: hidden;
+  font-family: var(--tech-font);
+  animation: hologramPop 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes hologramPop {
+  0% { opacity: 0; transform: translateY(20px) scale(0.9) skewX(5deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) skewX(0); }
+}
+
+/* 2. HEADER - "Terminal" Look */
+.gemini-header {
+  padding: 12px 16px;
+  background-color: var(--tech-surface);
+  border-bottom: 1px solid var(--tech-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gemini-title {
+  font-weight: 700;
+  color: var(--tech-accent);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+}
+
+.gemini-close-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--tech-text-dim);
+  transition: all 0.2s;
+}
+
+.gemini-close-btn:hover {
+  color: #ff3333;
+  text-shadow: 0 0 8px #ff3333;
+  transform: rotate(90deg);
+}
+
+/* 3. MESSAGES AREA - Grid Background */
+.gemini-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background-color: var(--tech-bg);
+  /* Cyber Grid Background Pattern */
+  background-image: 
+    linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.gemini-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.gemini-messages::-webkit-scrollbar-thumb {
+  background-color: var(--tech-border);
+}
+
+/* 4. MESSAGE BUBBLES */
+.msg-bubble {
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 85%;
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* User Message */
+.msg-user {
+  align-self: flex-end;
+  background-color: rgba(0, 243, 255, 0.08); /* Faint blue bg */
+  border: 1px solid var(--tech-accent);
+  color: var(--tech-accent);
+  border-bottom-right-radius: 0; /* Square edge */
+}
+.msg-user::before {
+  content: "USER >>";
+  display: block;
+  font-size: 10px;
+  opacity: 0.7;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+/* AI Message */
+.msg-model {
+  align-self: flex-start;
+  background-color: var(--tech-surface);
+  border: 1px solid var(--tech-border);
+  color: var(--tech-text-main);
+  border-left: 2px solid var(--tech-success); /* Green indicator line */
+  border-top-left-radius: 0;
+}
+.msg-model::before {
+  content: "SYSTEM :: GEMINI";
+  display: block;
+  font-size: 10px;
+  color: var(--tech-success);
+  margin-bottom: 6px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Loading Text */
+.loading-text {
+  font-size: 12px;
+  color: var(--tech-success);
+  margin-left: 10px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.loading-text::after {
+  content: "Processing...";
+  animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0.4; } }
+
+/* 5. INPUT AREA */
+.gemini-input-area {
+  padding: 16px;
+  background-color: var(--tech-surface);
+  border-top: 1px solid var(--tech-border);
+  display: flex;
+  gap: 10px;
+}
+
+.gemini-input {
+  flex: 1;
+  background-color: #050a10;
+  border: 1px solid var(--tech-border);
+  color: var(--tech-text-main);
+  padding: 12px;
+  font-family: var(--tech-font);
+  font-size: 13px;
+  outline: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.gemini-input::placeholder {
+  color: #334155;
+}
+
+.gemini-input:focus {
+  border-color: var(--tech-accent);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.gemini-send-btn {
+  background-color: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--tech-success);
+  color: var(--tech-success);
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.gemini-send-btn:hover {
+  background-color: var(--tech-success);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+}
+
+.gemini-send-btn:disabled {
+  filter: grayscale(1);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
