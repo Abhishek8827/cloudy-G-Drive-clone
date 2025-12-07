@@ -1,85 +1,55 @@
 # Google Drive Clone
 
 A React-based application that mimics Google Drive functionality with Firebase backend integration.
+# Cloudy G-Drive Clone
 
-## Features
+A simple Google Drive–like clone built with React and Firebase (Firestore + Storage).
 
-- File upload and storage
-- Real-time file synchronization with Firestore
-- File preview (images, PDFs, videos, audio)
-- File management (rename, delete)
-- Grid and list view modes
-- User authentication with Google
-- Responsive design with Material UI icons
+## Summary
 
-## Getting Started
+This project demonstrates a file manager UI with:
+- Google Sign-In (Firebase Authentication)
+- File upload to Firebase Storage
+- File and folder metadata in Firestore
+- Real-time updates via Firestore listeners
+- A Gemini/AI panel integration for interacting with files
 
-### Prerequisites
+## Quick setup (local)
 
-- Node.js (v14+)
-- npm or yarn
-- Firebase account
+1. Install dependencies (use the lockfile):
 
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/google-drive-clone.git
-cd google-drive-clone
+```powershell
+npm ci
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+2. Start the dev server:
 
-3. Configure Firebase:
-   - Update `src/firebase.js` with your Firebase configuration
-
-4. Start the development server:
-```bash
+```powershell
 npm start
 ```
 
-The application will open at `http://localhost:3000`.
+3. Build for production:
 
-## Build
-
-To create a production build:
-
-```bash
+```powershell
 npm run build
 ```
 
-## Project Structure
+## Firebase
 
-```
-src/
-├── App.js              # Main application component
-├── Data.js             # File management and display
-├── Header.js           # Header component
-├── Sidebar.js          # Sidebar navigation
-├── SignIn.jsx          # Authentication component
-├── PrivateRoute.jsx    # Route protection
-├── Trash.js            # Trash/deleted files view
-├── firebase.js         # Firebase configuration
-├── cors.json           # CORS configuration
-├── index.js            # Entry point
-├── index.css           # Global styles
-└── css/                # Component-specific styles
-    ├── auth.css
-    ├── data.css
-    ├── header.css
-    └── sidebar.css
-```
+The Firebase config is stored in `src/firebase.js`. For security in production, replace the hard-coded config with environment variables and a safe hosting setup.
 
-## Technologies Used
+## Notes about CI / GitHub Pages
 
-- **React** - UI library
-- **Firebase** - Backend and authentication
-- **Material UI** - UI components and icons
-- **React Router** - Client-side routing
+- If you see an `npm ci` error in GitHub Actions complaining about `package-lock.json`, ensure `package.json` and `package-lock.json` are in sync locally and pushed to the repository.
+- Use `npm ci` in CI for reproducible installs.
 
-## License
+## Security & Secrets
 
-This project is licensed under the MIT License.
+Do NOT commit production Firebase credentials to a public repo. Use GitHub Secrets and environment vars for deploy workflows.
+
+## Contact
+
+If you want, I can:
+- Re-run the GitHub Actions workflow
+- Create a GitHub Pages deployment workflow
+- Remove hard-coded Firebase config and show how to use secrets
