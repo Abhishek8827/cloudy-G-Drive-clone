@@ -25,8 +25,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Debug environment
+        run: |
+          node -v
+          npm -v
+          echo "--- node_modules/.bin ---"
+          ls -la node_modules/.bin || true
+          echo "--- npx version ---"
+          npx --version || true
+
+      - name: Build (use npx to ensure react-scripts binary is found)
+        run: npx react-scripts build
 
       - name: Ensure index fallback (copy index.html to 404.html)
         run: |
