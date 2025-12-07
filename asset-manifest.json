@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cloudy-G-Drive-clone/static/css/main.ab567907.css",
+    "main.js": "/cloudy-G-Drive-clone/static/js/main.cb849b9d.js",
+    "index.html": "/cloudy-G-Drive-clone/index.html",
+    "main.ab567907.css.map": "/cloudy-G-Drive-clone/static/css/main.ab567907.css.map",
+    "main.cb849b9d.js.map": "/cloudy-G-Drive-clone/static/js/main.cb849b9d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab567907.css",
+    "static/js/main.cb849b9d.js"
+  ]
+}

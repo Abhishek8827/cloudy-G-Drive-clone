@@ -1,0 +1,53 @@
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  pages: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Debug environment
+        run: |
+          node -v
+          npm -v
+          echo "--- node_modules/.bin ---"
+          ls -la node_modules/.bin || true
+          echo "--- npx version ---"
+          npx --version || true
+
+      - name: Build (use npx to ensure react-scripts binary is found)
+        run: npx react-scripts build
+
+      - name: Ensure index fallback (copy index.html to 404.html)
+        run: |
+          if [ -f build/index.html ]; then
+            cp build/index.html build/404.html
+          else
+            echo "build/index.html not found — ensure the build step produced files"
+            exit 1
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
