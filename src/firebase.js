@@ -6,12 +6,12 @@ import { getFirestore, serverTimestamp } from "firebase/firestore";
 import { getStorage, ref as storageRef } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBZHtlpel5zdBEz8PMzSA2Aqp0szpfqnfw",
-  authDomain: "drive-76237.firebaseapp.com",
-  projectId: "drive-76237",
-  storageBucket: "drive-76237.firebasestorage.app",
-  messagingSenderId: "416031778110",
-  appId: "1:416031778110:web:416f0a30cb73a6eeb9b86f",
+  apiKey: "FIREBASE_API",
+  authDomain: "DOMAIN",
+  projectId: "DRIVE_ID",
+  storageBucket: "BUCKET_ID",
+  messagingSenderId: "MESSAGE ID",
+  appId: "APP_ID",
 };
 
 const app = initializeApp(firebaseConfig);
